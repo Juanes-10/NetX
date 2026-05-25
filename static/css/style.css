@@ -34,7 +34,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow-x: hidden;
     position: relative;
 }
 
@@ -174,7 +174,7 @@ header {
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
     width: 100%;
-    max-width: 360px;
+    max-width: 300px;
     background: var(--color-borde);
     border: 1px solid var(--color-borde);
     padding: 6px;
@@ -187,7 +187,7 @@ header {
     align-items: center;
     justify-content: center;
     font-family: var(--font-mono);
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     cursor: pointer;
     transition: background 0.15s ease;
     position: relative;

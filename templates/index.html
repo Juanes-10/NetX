@@ -3,11 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetX</title>
+    <title>NetX — Triqui</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="app"></div>
+    <div class="fondo-grid"></div>
+    <main class="contenedor">
+        <header>
+            <h1 class="logo">NET<span>X</span></h1>
+            <p class="subtitulo">Triqui — Entrega 1</p>
+        </header>
+        <div class="marcador">
+            <div class="jugador" id="jugador-x">
+                <span class="simbolo x">X</span>
+                <span class="nombre">Jugador X</span>
+                <span class="puntos" id="puntos-x">0</span>
+            </div>
+            <div class="vs">VS</div>
+            <div class="jugador" id="jugador-o">
+                <span class="simbolo o">O</span>
+                <span class="nombre">Jugador O</span>
+                <span class="puntos" id="puntos-o">0</span>
+            </div>
+        </div>
+        <div class="turno-display" id="turno-display">
+            Turno de <span id="turno-actual">X</span>
+        </div>
+        <div class="tablero" id="tablero">
+            <div class="celda" data-posicion="0"></div>
+            <div class="celda" data-posicion="1"></div>
+            <div class="celda" data-posicion="2"></div>
+            <div class="celda" data-posicion="3"></div>
+            <div class="celda" data-posicion="4"></div>
+            <div class="celda" data-posicion="5"></div>
+            <div class="celda" data-posicion="6"></div>
+            <div class="celda" data-posicion="7"></div>
+            <div class="celda" data-posicion="8"></div>
+        </div>
+        <div class="mensaje-resultado" id="mensaje-resultado"></div>
+        <button class="btn-reiniciar" id="btn-reiniciar">↺ Nueva Partida</button>
+    </main>
     <script src="{{ url_for('static', filename='js/game.js') }}"></script>
 </body>
 </html>
