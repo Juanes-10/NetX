@@ -1,4 +1,25 @@
-/* Estilos principales */
+/* =============================================
+   NETX — ESTILOS ENTREGA 1
+   Estética: Retro-Futurista / Terminal Cyberpunk
+   ============================================= */
+
+:root {
+    --color-fondo: #070b12;
+    --color-superficie: #0d1421;
+    --color-borde: #1a2d4a;
+    --color-x: #00f5ff;
+    --color-o: #ff6b35;
+    --color-texto: #a8c5da;
+    --color-blanco: #e8f4ff;
+    --color-exito: #00ff88;
+    --font-mono: 'Share Tech Mono', monospace;
+    --font-display: 'Rajdhani', sans-serif;
+    --glow-x: 0 0 20px rgba(0, 245, 255, 0.5);
+    --glow-o: 0 0 20px rgba(255, 107, 53, 0.5);
+}
+
+/* RESET */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,6 +27,256 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--font-display);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Fondo con patrón de grid */
+.fondo-grid {
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.contenedor {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: 40px 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* HEADER */
+header {
+    text-align: center;
+}
+
+.logo {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--color-blanco);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.logo span {
+    color: var(--color-x);
+    text-shadow: var(--glow-x);
+}
+
+.subtitulo {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-borde);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* MARCADOR */
+.marcador {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    justify-content: center;
+}
+
+.jugador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 16px 24px;
+    border: 1px solid var(--color-borde);
+    background: var(--color-superficie);
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    transition: all 0.3s ease;
+    min-width: 110px;
+}
+
+.jugador.activo {
+    border-color: var(--color-x);
+    background: rgba(0, 245, 255, 0.05);
+}
+
+#jugador-o.activo {
+    border-color: var(--color-o);
+    background: rgba(255, 107, 53, 0.05);
+}
+
+.simbolo {
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.simbolo.x { color: var(--color-x); text-shadow: var(--glow-x); }
+.simbolo.o { color: var(--color-o); text-shadow: var(--glow-o); }
+
+.nombre {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--color-texto);
+    text-transform: uppercase;
+}
+
+.puntos {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--color-blanco);
+}
+
+.vs {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-borde);
+    letter-spacing: 0.2em;
+}
+
+/* TURNO */
+.turno-display {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-texto);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+#turno-actual {
+    color: var(--color-x);
+    font-weight: bold;
+}
+
+/* TABLERO */
+.tablero {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    width: 100%;
+    max-width: 360px;
+    background: var(--color-borde);
+    border: 1px solid var(--color-borde);
+    padding: 6px;
+}
+
+.celda {
+    aspect-ratio: 1;
+    background: var(--color-superficie);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 3.5rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    position: relative;
+    user-select: none;
+}
+
+.celda:hover:not(.ocupada) {
+    background: #111d2e;
+}
+
+.celda.ocupada {
+    cursor: not-allowed;
+}
+
+.celda.x {
+    color: var(--color-x);
+    text-shadow: var(--glow-x);
+    animation: aparecer 0.2s ease-out;
+}
+
+.celda.o {
+    color: var(--color-o);
+    text-shadow: var(--glow-o);
+    animation: aparecer 0.2s ease-out;
+}
+
+.celda.ganadora {
+    background: rgba(0, 255, 136, 0.08);
+    animation: parpadeo-ganador 0.8s ease infinite alternate;
+}
+
+.celda.ganadora.x {
+    color: var(--color-exito);
+    text-shadow: 0 0 25px rgba(0, 255, 136, 0.8);
+}
+
+.celda.ganadora.o {
+    color: var(--color-exito);
+    text-shadow: 0 0 25px rgba(0, 255, 136, 0.8);
+}
+
+/* MENSAJE RESULTADO */
+.mensaje-resultado {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--color-exito);
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    min-height: 1.5rem;
+    text-align: center;
+    animation: aparecerMensaje 0.4s ease;
+}
+
+/* BOTÓN REINICIAR */
+.btn-reiniciar {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-texto);
+    background: transparent;
+    border: 1px solid var(--color-borde);
+    padding: 12px 32px;
+    cursor: pointer;
+    clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+    transition: all 0.2s ease;
+}
+
+.btn-reiniciar:hover {
+    border-color: var(--color-x);
+    color: var(--color-x);
+    background: rgba(0, 245, 255, 0.05);
+    box-shadow: var(--glow-x);
+}
+
+/* ANIMACIONES */
+@keyframes aparecer {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+@keyframes parpadeo-ganador {
+    from { background: rgba(0, 255, 136, 0.05); }
+    to   { background: rgba(0, 255, 136, 0.15); }
+}
+
+@keyframes aparecerMensaje {
+    from { transform: translateY(8px); opacity: 0; }
+    to   { transform: translateY(0);   opacity: 1; }
 }
